@@ -36,11 +36,11 @@ interface ChatItem {
     lastMessageData: string;
     title: string;
     with: string;
-
 }
 
+
 export function Dashboard() {
-    const [chatList, setChatList] = useState<[] | undefined >();
+    const [chatList, setChatList] = useState<ChatItem>([]);
     const [activeChat, setActiveChat] = useState<ChatItem | undefined>(undefined);
     const [showNewChat, setShowNewChat] = useState(false);
     const [user, setUser] = useState<User>({
@@ -48,15 +48,18 @@ export function Dashboard() {
         avatar: "https://github.com/gegomes.png",
         name: 'Geinian Gomes'
     });
-    console.log(setUser, 'setuser');
-     
-    // const [user, setUser] = useState<User>()
+
+
+// const [user, setUser] = useState<User>()
+
+console.log(chatList.chatId,'chatList');
+
 useEffect(() => {
     if (user !== null) {
         const unsubscribe = OnChatMonitor(user.id, setChatList);
         return unsubscribe;
     }
-}, [user])
+}, [user]);
 
 function handleNewChat() {
     setShowNewChat(true);
